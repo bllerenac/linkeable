@@ -4,6 +4,7 @@ import { colors } from "../ui";
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -37,24 +38,51 @@ const AvatarContainer = styled.div(
 );
 
 const Information = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4px;
-  & > h4,
-  span {
-    font-size: 12px;
-    line-height: 15px;
-    font-weight: 400;
-  }
 `;
 
 const InfoHeader = styled.div`
   display: flex;
-  gap: 4px;
-  & > h3 {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+const InfoHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  & > header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & > h3 {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 19px;
+      margin-left: 4px;
+    }
+  }
+  & > h4, span {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #828282;
+  }
+`;
+
+const InfoArrow = styled.div`
+  position: absolute;
+  top: 70%;
+  right: 5%;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  & > svg {
+    font-size: 20px;
   }
 `;
 
@@ -67,20 +95,26 @@ function CandidateCard({
 }) {
   return (
     <Card>
-      <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
       <Information>
         <InfoHeader>
-          <img
-            src={`/assets/32x32/${country.code}.png`}
-            width="14px"
-            alt="flag"
-          />
-          <h3>{name}</h3>
-        </InfoHeader>
-        <h4>{profession}</h4>
-        <span>{`${experience} years of experience`}</span>
-      </Information>
-      <IoMdArrowDropdown />
+          <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
+          <InfoHeaderContainer>
+            <header>
+              <img
+                src={`/assets/32x32/${country.code}.png`}
+                width="14px"
+                alt="flag"
+              />
+              <h3>{name}</h3>
+            </header>
+            <h4>{profession}</h4>
+            <span>{`${experience} years of experience`}</span>
+          </InfoHeaderContainer>
+          <InfoArrow>
+            <IoMdArrowDropdown />  
+          </InfoArrow> 
+        </InfoHeader> 
+      </Information>  
     </Card>
   );
 }
