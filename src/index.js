@@ -13,10 +13,10 @@ const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: ${fontFamily}
   }
   body {
     background: grey;
-    font-family: ${fontFamily};
     color: ${colors.gray2};
   }
   #root {

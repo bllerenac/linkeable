@@ -25,7 +25,7 @@ export default function Avatar({ state, handleChange, currentStep, setCurrentSte
         avatarUrl={state.avatarUrl}
       />
       <ButtonContainer>
-        <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+        <Button type="button" size="large" onClick={() => setCurrentStep(currentStep - 1)}>
           Previous
         </Button>
         <Button size="large">Finish</Button>

@@ -1,8 +1,13 @@
-import { InputText, Select } from "../Inputs";
+import { InputText, Select, TextArea } from "../Inputs";
 import { RiCalendarTodoLine } from "react-icons/ri";
-import Button from '../Button';
+import Button from "../Button";
 
-export default function Personal({ state, handleChange, currentStep, setCurrentStep }) {
+export default function Personal({
+  state,
+  handleChange,
+  currentStep,
+  setCurrentStep,
+}) {
   return (
     <>
       <InputText
@@ -16,6 +21,7 @@ export default function Personal({ state, handleChange, currentStep, setCurrentS
         label="Phone"
         placeholder="xxx-xxx-xxx"
         name="phone"
+        type="tel"
         value={state.phone}
         onChange={handleChange}
       />
@@ -24,9 +30,10 @@ export default function Personal({ state, handleChange, currentStep, setCurrentS
         label="Birthday"
         placeholder="Pick a date"
         name="birthday"
+        type="date"
         value={state.birthday}
         onChange={handleChange}
-        icon={<RiCalendarTodoLine />}
+        // icon={<RiCalendarTodoLine />}
       />
       <Select
         label="Nationality"
@@ -40,7 +47,14 @@ export default function Personal({ state, handleChange, currentStep, setCurrentS
           { value: "mx", text: "Mexico" },
         ]}
       />
-      {/* Bio */}
+      <TextArea
+        label="Bio"
+        placeholder="Tell us about you..."
+        name="bio"
+        value={state.bio}
+        onChange={handleChange}
+        caption="Max 140 characteres"
+      />
       <InputText
         label="Profession"
         placeholder="Software Engineer"
@@ -48,7 +62,7 @@ export default function Personal({ state, handleChange, currentStep, setCurrentS
         value={state.profession}
         onChange={handleChange}
       />
-      <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+      <Button type="button" size="large" onClick={() => setCurrentStep(currentStep + 1)}>
         Next
       </Button>
     </>

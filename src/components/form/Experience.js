@@ -24,23 +24,25 @@ export default function Experience({ state, handleChange, currentStep, setCurren
         label="Start date"
         placeholder="Pick a date"
         name="startDate"
+        type="date"
         value={state.startDate}
         onChange={handleChange}
-        icon={<RiCalendarTodoLine />}
+        // icon={<RiCalendarTodoLine />}
       />
       <InputText
         label="End date"
         placeholder="Pick a date"
         name="endDate"
+        type="date"
         value={state.endDate}
         onChange={handleChange}
-        icon={<RiCalendarTodoLine />}
+        // icon={<RiCalendarTodoLine />}
       />
       <ButtonContainer>
-          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+          <Button type="button" size="large" onClick={() => setCurrentStep(currentStep - 1)}>
             Previous
           </Button>
-          <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+          <Button type="button" size="large" onClick={() => setCurrentStep(currentStep + 1)}>
             Next
           </Button>
       </ButtonContainer>
