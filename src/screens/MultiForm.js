@@ -9,7 +9,7 @@ import { AvatarContainer } from "../components/CandidateCard";
 import { useHistory } from "react-router";
 import formReducer from "../reducers/formReducer";
 
-const stepsData = ["Personal Information", "Avatar uploading"];
+const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
 const Header = styled.div`
   display: flex;
@@ -87,7 +87,11 @@ const fieldsStep1 = (state, handleChange) => {
   );
 };
 
-const fieldsStep2 = (state, handleChange) => {
+const fieldsStep2 = (_state, _handleChange) => {
+  return <h1>Form 2</h1>
+}
+
+const fieldsStep3 = (state, handleChange) => {
   return (
     <>
       <InputText
@@ -150,22 +154,13 @@ function MultiFrom({ onFormSubmit }) {
       <form onSubmit={handleSubmit}>
         {currentStep === 1 && fieldsStep1(state, handleChange)}
         {currentStep === 2 && fieldsStep2(state, handleChange)}
+        {currentStep === 3 && fieldsStep3(state, handleChange)}
       </form>
 
       {currentStep === 1 && (
         <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
           Next
         </Button>
-      )}
-      {currentStep === stepsData.length && (
-        <ButtonContainer>
-          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
-            Previous
-          </Button>
-          <Button size="large" onClick={handleSubmit}>
-            Finish
-          </Button>
-        </ButtonContainer>
       )}
       {currentStep > 1 && currentStep < stepsData.length && (
         <ButtonContainer>
@@ -174,6 +169,16 @@ function MultiFrom({ onFormSubmit }) {
           </Button>
           <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
             Next
+          </Button>
+        </ButtonContainer>
+      )}
+      {currentStep === stepsData.length && (
+        <ButtonContainer>
+          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+            Previous
+          </Button>
+          <Button size="large" onClick={handleSubmit}>
+            Finish
           </Button>
         </ButtonContainer>
       )}
