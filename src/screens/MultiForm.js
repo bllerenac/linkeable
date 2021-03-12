@@ -4,9 +4,11 @@ import styled from "@emotion/styled";
 import { useReducer, useState } from "react";
 import { useHistory } from "react-router";
 import formReducer from "../reducers/formReducer";
-import Experience from "../components/form/Experience";
+import Experiences from "../components/form/Experiences";
 import Personal from "../components/form/Personal";
 import Avatar from "../components/form/Avatar";
+import Button from '../components/Button';
+import { ButtonContainer } from '../ui';
 
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
@@ -21,7 +23,7 @@ export default function MultiFrom({ onFormSubmit }) {
     country: { name: "", code: "" },
     bio: "",
     profession: "",
-    experiences: [{ occupation: "", company: "", startDate: "", endDate: ""}],
+    experiences: [],
     avatarUrl: "",
   });
 
@@ -54,12 +56,37 @@ export default function MultiFrom({ onFormSubmit }) {
       <Steps steps={stepsData} currentStep={currentStep} />
       <Form onSubmit={handleSubmit}>
         {currentStep === 1 &&
-          fieldsStep1(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep1(state, handleChange)}
         {currentStep === 2 &&
-          fieldsStep2(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep2(state, handleChange)}
         {currentStep === 3 &&
-          fieldsStep3(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep3(state, handleChange)}
       </Form>
+      {currentStep === 1 && (
+        <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+          Next
+        </Button>
+      )}
+      {currentStep > 1 && currentStep < stepsData.length && (
+        <ButtonContainer>
+          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+            Previous
+          </Button>
+          <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+            Next
+          </Button>
+        </ButtonContainer>
+      )}
+      {currentStep === stepsData.length && (
+        <ButtonContainer>
+          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+            Previous
+          </Button>
+          <Button size="large" onClick={handleSubmit}>
+            Finish
+          </Button>
+        </ButtonContainer>
+      )}
     </Container>
   );
 }
@@ -73,10 +100,8 @@ const fieldsStep1 = (state, handleChange, currentStep, setCurrentStep) => (
   />
 );
 
-const fieldsStep2 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Experience
-    state={state}
-    handleChange={handleChange}
+const fieldsStep2 = (currentStep, setCurrentStep) => (
+  <Experiences
     currentStep={currentStep}
     setCurrentStep={setCurrentStep}
   />

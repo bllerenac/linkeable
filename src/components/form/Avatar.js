@@ -1,11 +1,9 @@
 import { InputText } from '../Inputs';
-import { ButtonContainer } from '../../ui';
-import Button from '../Button';
 import { AvatarContainer } from '../CandidateCard';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-export default function Avatar({ state, handleChange, currentStep, setCurrentStep }) {
+export default function Avatar({ state, handleChange }) {
   return (
     <>
       <InputText
@@ -24,12 +22,6 @@ export default function Avatar({ state, handleChange, currentStep, setCurrentSte
         `}
         avatarUrl={state.avatarUrl}
       />
-      <ButtonContainer>
-        <Button type="button" size="large" onClick={() => setCurrentStep(currentStep - 1)}>
-          Previous
-        </Button>
-        <Button size="large">Finish</Button>
-      </ButtonContainer>
     </>
   );
 }

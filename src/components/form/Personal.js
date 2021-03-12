@@ -1,12 +1,9 @@
 import { InputText, Select, TextArea } from "../Inputs";
 import { RiCalendarTodoLine } from "react-icons/ri";
-import Button from "../Button";
 
 export default function Personal({
   state,
-  handleChange,
-  currentStep,
-  setCurrentStep,
+  handleChange
 }) {
   return (
     <>
@@ -62,9 +59,6 @@ export default function Personal({
         value={state.profession}
         onChange={handleChange}
       />
-      <Button type="button" size="large" onClick={() => setCurrentStep(currentStep + 1)}>
-        Next
-      </Button>
     </>
   );
 }
