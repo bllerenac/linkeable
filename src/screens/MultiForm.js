@@ -11,110 +11,7 @@ import formReducer from "../reducers/formReducer";
 
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  & > h2,
-  svg {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-  }
-`;
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const SmallContent = styled.p`
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 15px;
-`;
-
-const fieldsStep1 = (state, handleChange) => {
-  return (
-    <>
-      <InputText
-        label="Name"
-        placeholder="John Doe"
-        name="name"
-        value={state.name}
-        onChange={handleChange}
-      />
-      <Select
-        label="Nationality"
-        placeholder="Select an option"
-        name="country"
-        value={state.country.code}
-        onChange={handleChange}
-        options={[
-          { value: "pe", text: "Peru" },
-          { value: "ve", text: "Venezuela" },
-          { value: "mx", text: "Mexico" },
-        ]}
-      />
-      <InputText
-        label="Profession"
-        placeholder="Software Engineer"
-        name="profession"
-        value={state.profession}
-        onChange={handleChange}
-      />
-      <InputText
-        label="Experience"
-        placeholder="0"
-        name="experience"
-        value={state.experience}
-        onChange={handleChange}
-      />
-    </>
-  );
-};
-
-const fieldsStep2 = (_state, _handleChange) => {
-  return <h1>Form 2</h1>
-}
-
-const fieldsStep3 = (state, handleChange) => {
-  return (
-    <>
-      <InputText
-        label="Avatar URL"
-        placeholder="https://..."
-        name="avatarUrl"
-        value={state.avatarUrl}
-        onChange={handleChange}
-      />
-      <SmallContent>Preview:</SmallContent>
-      <AvatarContainer
-        cssProp={css`
-          width: 90px;
-          height: 90px;
-          margin: 8px auto;
-        `}
-        avatarUrl={state.avatarUrl}
-      />
-    </>
-  );
-};
-
-function MultiFrom({ onFormSubmit }) {
+export default function MultiFrom({ onFormSubmit }) {
   const history = useHistory();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
@@ -186,4 +83,106 @@ function MultiFrom({ onFormSubmit }) {
   );
 }
 
-export default MultiFrom;
+const fieldsStep1 = (state, handleChange) => {
+  return (
+    <>
+      <InputText
+        label="Name"
+        placeholder="John Doe"
+        name="name"
+        value={state.name}
+        onChange={handleChange}
+      />
+      <Select
+        label="Nationality"
+        placeholder="Select an option"
+        name="country"
+        value={state.country.code}
+        onChange={handleChange}
+        options={[
+          { value: "pe", text: "Peru" },
+          { value: "ve", text: "Venezuela" },
+          { value: "mx", text: "Mexico" },
+        ]}
+      />
+      <InputText
+        label="Profession"
+        placeholder="Software Engineer"
+        name="profession"
+        value={state.profession}
+        onChange={handleChange}
+      />
+      <InputText
+        label="Experience"
+        placeholder="0"
+        name="experience"
+        value={state.experience}
+        onChange={handleChange}
+      />
+    </>
+  );
+};
+
+const fieldsStep2 = (_state, _handleChange) => {
+  return <h1>Form 2</h1>
+}
+
+const fieldsStep3 = (state, handleChange) => {
+  return (
+    <>
+      <InputText
+        label="Avatar URL"
+        placeholder="https://..."
+        name="avatarUrl"
+        value={state.avatarUrl}
+        onChange={handleChange}
+      />
+      <SmallContent>Preview:</SmallContent>
+      <AvatarContainer
+        cssProp={css`
+          width: 90px;
+          height: 90px;
+          margin: 8px auto;
+        `}
+        avatarUrl={state.avatarUrl}
+      />
+    </>
+  );
+};
+
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  & > h2,
+  svg {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+  }
+`;
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const SmallContent = styled.p`
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+`;
