@@ -11,6 +11,7 @@ import { RiArrowDownSFill, RiSearch2Line } from "react-icons/ri";
 import { colors } from "../ui";
 import { useHistory } from "react-router";
 import queryReducer from "../reducers/queryReducer";
+import SelectLabel from "../components/Selectlabel";
 
 const SearchForm = styled.form``;
 
@@ -46,6 +47,12 @@ const FiltersContainer = styled.div`
   line-height: 17px;
   cursor: pointer;
   color: ${colors.gray3};
+`;
+
+const FilterCountries = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 `;
 
 function Search({ candidates }) {
@@ -165,19 +172,19 @@ function Search({ candidates }) {
               <option value="Venezuela">Venezuela</option>
             </select>
             <span>Selected:</span>
-            {state.queryCountry.map((c, i) => (
-              <span
-                key={i}
+            <FilterCountries>
+              {state.queryCountry.map((c, i) => (
+                <SelectLabel key={i}
                 onClick={() =>
                   dispatch({
                     type: "REMOVE_COUNTRY",
                     payload: { removeCountry: c },
                   })
-                }
-              >
-                {c}
-              </span>
-            ))}
+                }>
+                  {c}
+                </SelectLabel>
+              ))}
+            </FilterCountries>
           </div>
         </AdvanceSearch>
       </SearchForm>

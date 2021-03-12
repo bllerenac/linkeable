@@ -1,3 +1,5 @@
+import styled from "@emotion/styled";
+
 const colors = {
   gray1: "#333333",
   gray2: "#4F4F4F",
@@ -11,4 +13,10 @@ const colors = {
   blue: "#2D9CDB",
 };
 
-export { colors };
+const ButtonContainer = styled.div `
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+`
+
+export { colors, ButtonContainer };

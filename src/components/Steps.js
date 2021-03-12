@@ -3,13 +3,44 @@ import styled from "@emotion/styled";
 import { colors } from "../ui";
 import { RiCheckFill } from "react-icons/ri";
 
-const StepContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding: 4px;
-  gap: 4px;
-  width: 100px;
-`;
+export default function Steps({ steps = [], currentStep = 1 }) {
+  return (
+    <StepsContainer>
+      {steps.map((step, index) => (
+        <Step
+          key={index}
+          stepNumber={index + 1}
+          description={step}
+          status={getStatus(index + 1, currentStep)}
+        />
+      ))}
+    </StepsContainer>
+  );
+}
+
+function Step({ stepNumber, description, status }) {
+  return (
+    <StepContainer>
+      <StepNumber status={status}>
+        {status === "finished" ? <RiCheckFill /> : stepNumber}
+      </StepNumber>
+      <StepInfo status={status}>
+        <h4>{status}</h4>
+        <p>{description}</p>
+      </StepInfo>
+    </StepContainer>
+  );
+}
+
+const getStatus = (stepNumber, currentNumber) => {
+  if (stepNumber < currentNumber) {
+    return "finished";
+  } else if (stepNumber === currentNumber) {
+    return "progress";
+  } else {
+    return "waiting";
+  }
+};
 
 const numberBorder = {
   progress: "1px solid transparent",
@@ -28,6 +59,20 @@ const numberColor = {
   waiting: colors.gray4,
   finished: colors.green,
 };
+
+const StepsContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+const StepContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  padding: 4px;
+  gap: 4px;
+  width: 100px;
+`;
 
 const StepNumber = styled.div(
   ({ status }) => css`
@@ -72,50 +117,3 @@ const StepInfo = styled.div(
     }
   `
 );
-
-function Step({ stepNumber, description, status }) {
-  return (
-    <StepContainer>
-      <StepNumber status={status}>
-        {status === "finished" ? <RiCheckFill /> : stepNumber}
-      </StepNumber>
-      <StepInfo status={status}>
-        <h4>{status}</h4>
-        <p>{description}</p>
-      </StepInfo>
-    </StepContainer>
-  );
-}
-
-const getStatus = (stepNumber, currentNumber) => {
-  if (stepNumber < currentNumber) {
-    return "finished";
-  } else if (stepNumber === currentNumber) {
-    return "progress";
-  } else {
-    return "waiting";
-  }
-};
-
-const StepsContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-`;
-
-function Steps({ steps = [], currentStep = 1 }) {
-  return (
-    <StepsContainer>
-      {steps.map((step, index) => (
-        <Step
-          key={index}
-          stepNumber={index + 1}
-          description={step}
-          status={getStatus(index + 1, currentStep)}
-        />
-      ))}
-    </StepsContainer>
-  );
-}
-
-export default Steps;

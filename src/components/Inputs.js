@@ -29,6 +29,20 @@ const StyledSelect = styled.select`
   }
 `;
 
+const StyledTextarea = styled.textarea`
+  width: 100%;
+  min-height: 80px;
+  border: none;
+  resize: none;
+  color: ${colors.gray2};
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: ${colors.gray5};
+  }
+`;
+
 const Container = styled.div(
   (props) => css`
     width: 100%;
@@ -81,6 +95,7 @@ function InputText({
   placeholder = "",
   name = "",
   value = "",
+  type = "",
   onChange,
   cssProp,
 }) {
@@ -90,6 +105,7 @@ function InputText({
       <Container error={error}>
         <StyledInput
           value={value}
+          type={type}
           name={name}
           placeholder={placeholder}
           id={name}
@@ -141,4 +157,29 @@ function Select({
   );
 }
 
-export { InputText, Select };
+function TextArea({
+  label = "",
+  caption = "",
+  error = false,
+  placeholder = "",
+  name = "",
+  value = "",
+  onChange,
+}) {
+  return (
+    <FieldContainer>
+      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+      <Container>
+        <StyledTextarea
+          placeholder={placeholder}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      </Container>
+      {caption && <Caption error={error}>{caption}</Caption>}
+    </FieldContainer>
+  );
+}
+
+export { InputText, Select, TextArea };

@@ -1,4 +1,5 @@
 const formReducer = (prevState, { type, payload }) => {
+  console.log(prevState);
   const countries = {
     pe: "Peru",
     ve: "Venezuela",
