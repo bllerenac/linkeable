@@ -3,6 +3,8 @@ import { RiCalendarTodoLine } from "react-icons/ri";
 import { css } from "@emotion/react";
 import Button from "../Button";
 import { useReducer } from "react";
+import styled from '@emotion/styled';
+import { colors } from '../../ui';
 
 export default function Experiences() {
   const [state, dispatch] = useReducer(experiencesReducer, {
@@ -39,7 +41,7 @@ export default function Experiences() {
 
 function Experience({ state, handleChange }) {
   return (
-    <div>
+    <StyledExperience>
       <InputText
         label="Occupation"
         placeholder="Frontend developer"
@@ -72,7 +74,7 @@ function Experience({ state, handleChange }) {
         onChange={handleChange}
         // icon={<RiCalendarTodoLine />}
       />
-    </div>
+    </StyledExperience>
   );
 }
 
@@ -94,3 +96,9 @@ const experiencesReducer = (prevstate, action) => {
       throw new Error("Action is not recognized!")
   }
 }
+
+const StyledExperience = styled.div`
+  padding: 8px;
+  border: 1px solid ${colors.gray4};
+  border-radius: 8px;
+`

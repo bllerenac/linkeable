@@ -91,30 +91,11 @@ export default function MultiFrom({ onFormSubmit }) {
   );
 }
 
-const fieldsStep1 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Personal
-    state={state}
-    handleChange={handleChange}
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep1 = (state, handleChange) => <Personal state={state} handleChange={handleChange} />
 
-const fieldsStep2 = (currentStep, setCurrentStep) => (
-  <Experiences
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep2 = () => <Experiences />
 
-const fieldsStep3 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Avatar
-    state={state}
-    handleChange={handleChange}
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep3 = (state, handleChange) =>  <Avatar state={state} handleChange={handleChange} />
 
 const Header = styled.div`
   display: flex;
