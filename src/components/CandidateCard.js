@@ -4,7 +4,6 @@ import { colors } from "../ui";
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -40,11 +39,12 @@ const AvatarContainer = styled.div(
 const Information = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  gap: 4px;
+  flex-direction: column;
+  gap: 18px;
 `;
 
 const InfoHeader = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -87,7 +87,24 @@ const InfoArrow = styled.div`
 `;
 
 const InfoBody = styled.div`
-
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  & > div {
+    width: 50%;
+    & > h4 {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+    }
+    & > p {
+      color: #828282;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
 `;
 
 function CandidateCard({
@@ -96,7 +113,12 @@ function CandidateCard({
   profession = "No Profession",
   experience = 0,
   avatarUrl,
+  gender,
+  phone = "No phone",
+  birthday,
+  bio = "No Bio",
 }) {
+  console.log(avatarUrl);
   return (
     <Card>
       <Information>
@@ -119,7 +141,18 @@ function CandidateCard({
           </InfoArrow> 
         </InfoHeader>
         <InfoBody>
-          
+          <div>
+            <h4>Gender</h4>
+            <p>{gender}</p>
+            <h4>Phone</h4>
+            <p>{phone}</p>
+            <h4>Birthday</h4>
+            <p>{birthday}</p>
+          </div>
+          <div>
+            <h4>Bio</h4>
+            <p>{bio}</p>
+          </div>
         </InfoBody>
       </Information>  
     </Card>
