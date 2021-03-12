@@ -1,9 +1,13 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { colors } from "../ui";
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
   display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 8px;
   padding: 8px;
   background: ${colors.white};
@@ -11,6 +15,10 @@ const Card = styled.div`
   box-sizing: border-box;
   box-shadow: 2px 2px 0px ${colors.gray4};
   border-radius: 8px;
+  & > svg {
+    font-size: 20px;
+    cursor: pointer;
+  }
 `;
 
 const AvatarContainer = styled.div(
@@ -72,6 +80,7 @@ function CandidateCard({
         <h4>{profession}</h4>
         <span>{`${experience} years of experience`}</span>
       </Information>
+      <IoMdArrowDropdown />
     </Card>
   );
 }
