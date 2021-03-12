@@ -110,7 +110,7 @@ const fieldsStep2 = (state, handleChange) => {
   );
 };
 
-function MultiFrom({ onFormSubmit }) {
+function MultiForm({ onFormSubmit }) {
   const history = useHistory();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
@@ -181,4 +181,4 @@ function MultiFrom({ onFormSubmit }) {
   );
 }
 
-export default MultiFrom;
+export default MultiForm;
