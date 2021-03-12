@@ -8,6 +8,8 @@ import { useReducer, useState } from "react";
 import { AvatarContainer } from "../components/CandidateCard";
 import { useHistory } from "react-router";
 import formReducer from "../reducers/formReducer";
+import { RiCalendarTodoLine } from "react-icons/ri";
+import Experience from "../components/form/Experience";
 
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
@@ -16,9 +18,16 @@ export default function MultiFrom({ onFormSubmit }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
     name: "",
-    country: { code: "" },
+    phone: "",
+    gender: "",
+    birthday: "",
+    country: { name: "", code: "" },
+    bio: "",
     profession: "",
-    experience: "",
+    occupation: "",
+    company: "",
+    startDate: "",
+    endDate: "",
     avatarUrl: "",
   });
 
@@ -50,7 +59,7 @@ export default function MultiFrom({ onFormSubmit }) {
       <Steps steps={stepsData} currentStep={currentStep} />
       <form onSubmit={handleSubmit}>
         {currentStep === 1 && fieldsStep1(state, handleChange)}
-        {currentStep === 2 && fieldsStep2(state, handleChange)}
+        {currentStep === 2 && fieldsStep2(state, handleChange, currentStep, setCurrentStep)}
         {currentStep === 3 && fieldsStep3(state, handleChange)}
       </form>
 
@@ -58,16 +67,6 @@ export default function MultiFrom({ onFormSubmit }) {
         <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
           Next
         </Button>
-      )}
-      {currentStep > 1 && currentStep < stepsData.length && (
-        <ButtonContainer>
-          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
-            Previous
-          </Button>
-          <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
-            Next
-          </Button>
-        </ButtonContainer>
       )}
       {currentStep === stepsData.length && (
         <ButtonContainer>
@@ -93,6 +92,22 @@ const fieldsStep1 = (state, handleChange) => {
         value={state.name}
         onChange={handleChange}
       />
+      <InputText
+        label="Phone"
+        placeholder="xxx-xxx-xxx"
+        name="phone"
+        value={state.phone}
+        onChange={handleChange}
+      />
+      {/* Gender */}
+      <InputText
+        label="Birthday"
+        placeholder="Pick a date"
+        name="birthday"
+        value={state.birthday}
+        onChange={handleChange}
+        icon={<RiCalendarTodoLine />}
+      />
       <Select
         label="Nationality"
         placeholder="Select an option"
@@ -105,6 +120,7 @@ const fieldsStep1 = (state, handleChange) => {
           { value: "mx", text: "Mexico" },
         ]}
       />
+      {/* Bio */}
       <InputText
         label="Profession"
         placeholder="Software Engineer"
@@ -112,20 +128,22 @@ const fieldsStep1 = (state, handleChange) => {
         value={state.profession}
         onChange={handleChange}
       />
-      <InputText
-        label="Experience"
-        placeholder="0"
-        name="experience"
-        value={state.experience}
-        onChange={handleChange}
-      />
     </>
   );
 };
 
-const fieldsStep2 = (_state, _handleChange) => {
-  return <h1>Form 2</h1>
-}
+const fieldsStep2 = (state, handleChange, currentStep, setCurrentStep) => {
+  return (
+    <>
+      <Experience
+        state={state}
+        handleChange={handleChange}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
+    </>
+  );
+};
 
 const fieldsStep3 = (state, handleChange) => {
   return (
@@ -149,7 +167,6 @@ const fieldsStep3 = (state, handleChange) => {
     </>
   );
 };
-
 
 const Header = styled.div`
   display: flex;

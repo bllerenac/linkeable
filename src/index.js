@@ -34,6 +34,10 @@ const globalStyles = css`
     font-family: inherit;
     color: inherit;
   }
+
+  /* ::-webkit-calendar-picker-indicator {
+    display:none
+  } */
 `;
 
 ReactDOM.render(
