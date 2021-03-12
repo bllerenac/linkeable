@@ -1,6 +1,6 @@
 import { InputText } from '../Inputs';
 import { RiCalendarTodoLine } from 'react-icons/ri';
-import styled from '@emotion/styled';
+import { ButtonContainer } from '../../ui';
 import Button from '../Button';
 
 export default function Experience({ state, handleChange, currentStep, setCurrentStep }) {
@@ -47,8 +47,3 @@ export default function Experience({ state, handleChange, currentStep, setCurren
     </>
   );
 }
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 8px;
-`;
