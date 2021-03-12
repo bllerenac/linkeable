@@ -35,9 +35,9 @@ const StyledButton = styled.button(
   `
 );
 
-function Button({ children, size = "medium", onClick }) {
+function Button({ type, children, size = "medium", onClick }) {
   return (
-    <StyledButton size={size} onClick={onClick}>
+    <StyledButton type={type} size={size} onClick={onClick}>
       {children}
     </StyledButton>
   );
