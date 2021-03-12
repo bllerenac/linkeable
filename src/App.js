@@ -11,6 +11,10 @@ const initialCandidates = [
     profession: "Developer",
     experience: "2",
     avatarUrl: "/assets/avatars/avatar.png",
+    gender: "Male",
+    phone: "987-654-321",
+    birthday: "2000-10-24",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
   },
   {
     country: { name: "Mexico", code: "mx" },
@@ -18,6 +22,10 @@ const initialCandidates = [
     profession: "Developer as well",
     experience: "5",
     avatarUrl: "/assets/avatars/avatar.png",
+    gender: "Male",
+    phone: "954-654-123",
+    birthday: "1994-10-27",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
   },
   {
     country: { name: "Venezuela", code: "ve" },
@@ -25,6 +33,10 @@ const initialCandidates = [
     profession: "Speaker",
     experience: "10",
     avatarUrl: "/assets/avatars/avatar.png",
+    gender: "Male",
+    phone: "999-654-321",
+    birthday: "1990-07-07",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
   },
 ];
 

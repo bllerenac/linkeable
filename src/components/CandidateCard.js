@@ -86,6 +86,10 @@ const InfoArrow = styled.div`
   }
 `;
 
+const InfoBody = styled.div`
+
+`;
+
 function CandidateCard({
   country = { name: "Peru", code: "pe" },
   name = "No name",
@@ -113,7 +117,10 @@ function CandidateCard({
           <InfoArrow>
             <IoMdArrowDropdown />  
           </InfoArrow> 
-        </InfoHeader> 
+        </InfoHeader>
+        <InfoBody>
+          
+        </InfoBody>
       </Information>  
     </Card>
   );
