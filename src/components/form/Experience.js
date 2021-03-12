@@ -1,6 +1,7 @@
 import { InputText } from '../Inputs';
 import { RiCalendarTodoLine } from 'react-icons/ri';
 import { ButtonContainer } from '../../ui';
+import { css } from '@emotion/react';
 import Button from '../Button';
 
 export default function Experience({ state, handleChange, currentStep, setCurrentStep }) {
@@ -38,6 +39,7 @@ export default function Experience({ state, handleChange, currentStep, setCurren
         onChange={handleChange}
         // icon={<RiCalendarTodoLine />}
       />
+      <Button css={css`margin-bottom: 35px;`} type="button" syze="small">Add another experience</Button>
       <ButtonContainer>
           <Button type="button" size="large" onClick={() => setCurrentStep(currentStep - 1)}>
             Previous
