@@ -145,6 +145,41 @@ const InfoJob = styled.div`
   }
 `;
 
+function ConvertDate(date) {
+  return date.split("-");
+}
+
+function ConvertMonth(month) {
+  switch(month) {
+    case "01":
+      return "Jan";
+    case "02":
+      return "Feb";
+    case "03":
+      return "Mar";
+    case "04":
+      return "Apr";
+    case "05":
+      return "May";
+    case "06":
+      return "Jun";
+    case "07":
+      return "Jul";
+    case "08":
+      return "Aug";
+    case "09":
+      return "Set";
+    case "10":
+      return "Oct";
+    case "11":
+      return "Nov";
+    case "12":
+      return "Dec";
+    default:
+      break;
+  }
+}
+
 function CandidateCard({ candidate, index, toggleCandidate }) {
   return (
     <Card
@@ -194,7 +229,9 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
                 <span>Duration</span>
               </div>
               <p>{job.company}</p>
-              <p>{job.start_date} // {job.end_date}</p>
+              <p>
+                {ConvertMonth(ConvertDate(job.start_date)[1])} {ConvertDate(job.start_date)[2]} - {ConvertMonth(ConvertDate(job.end_date)[1])} {ConvertDate(job.end_date)[2]}
+              </p>
             </InfoJob>
           ))}
         </InfoExperience>
