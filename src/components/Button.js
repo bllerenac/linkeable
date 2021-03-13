@@ -22,6 +22,7 @@ const StyledButton = styled.button(
     font-size: ${props.size === "large" ? "14px" : "12px"};
     line-height: ${props.size === "large" ? "17px" : "15px"};
     cursor: pointer;
+    ${props.css}
     &:hover {
       background: ${colors.gray4};
     }
@@ -35,9 +36,9 @@ const StyledButton = styled.button(
   `
 );
 
-function Button({ type, children, size = "medium", onClick }) {
+function Button({ css, type, children, size = "medium", onClick }) {
   return (
-    <StyledButton type={type} size={size} onClick={onClick}>
+    <StyledButton css={css} type={type} size={size} onClick={onClick}>
       {children}
     </StyledButton>
   );

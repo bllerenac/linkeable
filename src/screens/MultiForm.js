@@ -4,9 +4,11 @@ import styled from "@emotion/styled";
 import { useReducer, useState } from "react";
 import { useHistory } from "react-router";
 import formReducer from "../reducers/formReducer";
-import Experience from "../components/form/Experience";
+import Experiences from "../components/form/Experiences";
 import Personal from "../components/form/Personal";
 import Avatar from "../components/form/Avatar";
+import Button from '../components/Button';
+import { ButtonContainer } from '../ui';
 
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
@@ -26,8 +28,7 @@ function MultiForm({ onFormSubmit }) {
     avatarUrl: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (name, value) => {
     dispatch({ type: "CHANGE_FIELD", payload: { name, value } });
   };
 
@@ -54,42 +55,46 @@ function MultiForm({ onFormSubmit }) {
       <Steps steps={stepsData} currentStep={currentStep} />
       <Form onSubmit={handleSubmit}>
         {currentStep === 1 &&
-          fieldsStep1(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep1(state, handleChange)}
         {currentStep === 2 &&
-          fieldsStep2(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep2(state, handleChange)}
         {currentStep === 3 &&
-          fieldsStep3(state, handleChange, currentStep, setCurrentStep)}
+          fieldsStep3(state, handleChange)}
       </Form>
+      {currentStep === 1 && (
+        <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+          Next
+        </Button>
+      )}
+      {currentStep > 1 && currentStep < stepsData.length && (
+        <ButtonContainer>
+          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+            Previous
+          </Button>
+          <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+            Next
+          </Button>
+        </ButtonContainer>
+      )}
+      {currentStep === stepsData.length && (
+        <ButtonContainer>
+          <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
+            Previous
+          </Button>
+          <Button size="large" onClick={handleSubmit}>
+            Finish
+          </Button>
+        </ButtonContainer>
+      )}
     </Container>
   );
 }
 
-const fieldsStep1 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Personal
-    state={state}
-    handleChange={handleChange}
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep1 = (state, handleChange) => <Personal state={state} handleChange={handleChange} />
 
-const fieldsStep2 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Experience
-    state={state}
-    handleChange={handleChange}
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep2 = (state, handleChange) => <Experiences state={state} handleChange={handleChange} />
 
-const fieldsStep3 = (state, handleChange, currentStep, setCurrentStep) => (
-  <Avatar
-    state={state}
-    handleChange={handleChange}
-    currentStep={currentStep}
-    setCurrentStep={setCurrentStep}
-  />
-);
+const fieldsStep3 = (state, handleChange) =>  <Avatar state={state} handleChange={handleChange} />
 
 const Header = styled.div`
   display: flex;

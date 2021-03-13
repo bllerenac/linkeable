@@ -19,10 +19,14 @@ const formReducer = (prevState, { type, payload }) => {
     case "RESET":
       return {
         name: "",
-        country: { code: "" },
+        phone: "",
+        gender: "",
+        birthday: "",
+        country: { name: "", code: "" },
+        bio: "",
         profession: "",
-        experience: "",
-        avatarUrl: "",
+        experiences: [{ occupation: "", company: "", startDate: "", endDate: "" }],
+        avatarUrl: ""
       };
     default:
       throw new Error("Invalid action");
