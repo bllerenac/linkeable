@@ -87,6 +87,38 @@ const Caption = styled.span(
   `
 );
 
+const MainRadio = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 10px 0;
+`
+
+const ContainerRadio = styled.div`
+  input {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    transition: all 300ms;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  input:checked + label {
+    background-color: gray;
+    color: white;
+    border: 1px solid transparent;
+  }
+`
+
+const LabelRadio = styled.label`
+  padding: 8px 12px;
+  width: fit-content;
+  border: 1px solid ${colors.gray4};
+`
+
 function InputText({
   label = "",
   caption = "",
@@ -116,6 +148,28 @@ function InputText({
       {caption && <Caption error={error}>Caption test</Caption>}
     </FieldContainer>
   );
+}
+
+function InputsRadio({ label, onChange }) {
+  return(
+    <FieldContainer>
+      {label && <InputLabel>{label}</InputLabel>}
+      <MainRadio>
+        <ContainerRadio>
+          <input type="radio" id="male" name="gender" value="male" onChange={onChange}/>
+          <LabelRadio htmlFor="male">Male</LabelRadio>
+        </ContainerRadio>
+        <ContainerRadio>
+          <input type="radio" id="female" name="gender" value="female" onChange={onChange}/>
+          <LabelRadio htmlFor="female"> Female </LabelRadio>
+        </ContainerRadio>
+        <ContainerRadio>
+          <input type="radio" id="other" name="gender" value="other" onChange={onChange}/>
+          <LabelRadio htmlFor="other">Other</LabelRadio>
+        </ContainerRadio>
+        </MainRadio>
+    </FieldContainer>
+  )
 }
 
 function Select({
@@ -182,4 +236,4 @@ function TextArea({
   );
 }
 
-export { InputText, Select, TextArea };
+export { InputText, Select, TextArea, InputsRadio };
