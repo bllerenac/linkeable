@@ -70,6 +70,7 @@ function Search({ candidates }) {
     queryMinAge: "",
     queryMaxAge: "",
     queryCountry: [],
+    queryGender: [],
   });
   const [filteredCandidates, setFilteredCandidates] = useState(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
@@ -92,6 +93,11 @@ function Search({ candidates }) {
     dispatch({ type: "ADD_COUNTRY", payload: value });
   };
 
+  const handleGenderChange = (e) => {
+    const { value } = e.target;
+    dispatch({ type: "ADD_G", payload: value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameRegex = new RegExp(state.queryName, "i");
@@ -104,7 +110,8 @@ function Search({ candidates }) {
         parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
         parseInt(candidate.age) >= state.queryMinAge &&
         parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
-        state.queryCountry.includes(candidate.country.name)
+        state.queryCountry.includes(candidate.country.name) &&
+        state.queryGender.includes(candidate.gender.name)
     );
     setFilteredCandidates(filtered);
   };
@@ -163,7 +170,7 @@ function Search({ candidates }) {
               onChange={handleQueryChange} 
               min_value={state.queryMinAge} 
               max_value={state.queryMaxAge}/>
-              <Options/>
+              <Options value={["Male", "Female", "Other"]} onChange={handleGenderChange} />
           </div>
         </AdvanceSearch>
       </SearchForm>
