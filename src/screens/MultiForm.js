@@ -13,7 +13,8 @@ const stepsData = ["Personal Information", "Work experience", "Avatar"];
 
 export default function MultiFrom({ onFormSubmit }) {
   const history = useHistory();
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisabledPersonal, setIsDisabledPersonal] = useState(true);
+  const [isDisabledExperience, setIsDisabledExperience] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
     name: "",
@@ -28,17 +29,28 @@ export default function MultiFrom({ onFormSubmit }) {
   });
 
   useEffect(() => {
-    setIsDisabled(
+    setIsDisabledPersonal(
       !state.name ||
-      !state.phone ||
-      !state.gender ||
-      !state.birthday ||
-      !state.bio ||
-      !state.profession ||
-      !state.country.name ||
-      !state.country.code
+        !state.phone ||
+        !state.gender ||
+        !state.birthday ||
+        !state.bio ||
+        !state.profession ||
+        !state.country.name ||
+        !state.country.code
     );
   }, [state]);
+
+  useEffect(() => {
+    state.experiences.forEach((experience) => {
+      setIsDisabledExperience(
+        !experience.occupation ||
+          !experience.company ||
+          !experience.startDate ||
+          !experience.endDate
+      );
+    });
+  }, [state.experiences]);
 
   const handleChange = (name, value) => {
     dispatch({ type: "CHANGE_FIELD", payload: { name, value } });
@@ -72,7 +84,7 @@ export default function MultiFrom({ onFormSubmit }) {
       </Form>
       {currentStep === 1 && (
         <Button
-          disabled={isDisabled}
+          disabled={isDisabledPersonal}
           size="large"
           onClick={() => setCurrentStep(currentStep + 1)}
         >
@@ -84,7 +96,11 @@ export default function MultiFrom({ onFormSubmit }) {
           <Button size="large" onClick={() => setCurrentStep(currentStep - 1)}>
             Previous
           </Button>
-          <Button size="large" onClick={() => setCurrentStep(currentStep + 1)}>
+          <Button
+            disabled={isDisabledExperience}
+            size="large"
+            onClick={() => setCurrentStep(currentStep + 1)}
+          >
             Next
           </Button>
         </ButtonContainer>
