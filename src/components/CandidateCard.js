@@ -1,16 +1,33 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { colors } from "../ui";
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
+  position: relative;
+  width: 100%;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   padding: 8px;
   background: ${colors.white};
   border: 1px solid ${colors.gray4};
   box-sizing: border-box;
   box-shadow: 2px 2px 0px ${colors.gray4};
   border-radius: 8px;
+  cursor: pointer;
+  & > div {
+    i {
+      transition: all 0.4s ease;
+    }
+  } 
+  & > main {
+    opacity: 0;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: all 0.4s ease;
+  }
 `;
 
 const AvatarContainer = styled.div(
@@ -28,50 +45,108 @@ const AvatarContainer = styled.div(
   `
 );
 
-const Information = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  & > h4,
-  span {
-    font-size: 12px;
-    line-height: 15px;
-    font-weight: 400;
-  }
-`;
-
 const InfoHeader = styled.div`
   display: flex;
-  gap: 4px;
-  & > h3 {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
+  flex-direction: row;
+  gap: 8px;
+`;
+
+const InfoHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  & > header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    & > h3 {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 19px;
+      margin-left: 4px;
+    }
+  }
+  & > h4, span {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    color: #828282;
   }
 `;
 
-function CandidateCard({
-  country = { name: "Peru", code: "pe" },
-  name = "No name",
-  profession = "No Profession",
-  experience = 0,
-  avatarUrl,
-}) {
+const InfoArrow = styled.i`
+  position: absolute;
+  bottom: -4px;
+  right: 10px;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  & > svg {
+    font-size: 20px;
+  }
+`;
+
+const InfoBody = styled.main`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  & > div {
+    width: 50%;
+    & > h4 {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+    }
+    & > p {
+      color: #828282;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+`;
+
+function CandidateCard({ candidate, index, toggleCandidate }) {
   return (
-    <Card>
-      <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
-      <Information>
-        <InfoHeader>
-          <img
-            src={`/assets/32x32/${country.code}.png`}
-            width="14px"
-            alt="flag"
-          />
-          <h3>{name}</h3>
-        </InfoHeader>
-        <h4>{profession}</h4>
-        <span>{`${experience} years of experience`}</span>
-      </Information>
+    <Card
+      className={ "candidate " + (candidate.open ? "open" : "") }
+      key={index}
+      onClick={ () => toggleCandidate(index) }
+    >
+      <InfoHeader>
+        <AvatarContainer avatarUrl={candidate.avatarUrl}></AvatarContainer>
+        <InfoHeaderContainer>
+          <header>
+            <img
+              src={`/assets/32x32/${candidate.country.code}.png`}
+              width="14px"
+              alt="flag"
+            />
+            <h3>{candidate.name}</h3>
+          </header>
+          <h4>{candidate.profession}</h4>
+          <span>{`${candidate.experience} years of experience`}</span>
+        </InfoHeaderContainer>
+        <InfoArrow>
+          <IoMdArrowDropdown />  
+        </InfoArrow> 
+      </InfoHeader>
+      <InfoBody>
+        <div>
+          <h4>Gender</h4>
+          <p>{candidate.gender}</p>
+          <h4>Phone</h4>
+          <p>{candidate.phone}</p>
+          <h4>Birthday</h4>
+          <p>{candidate.birthday}</p>
+        </div>
+        <div>
+          <h4>Bio</h4>
+          <p>{candidate.bio}</p>
+        </div>
+      </InfoBody>
     </Card>
   );
 }
