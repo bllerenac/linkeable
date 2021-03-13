@@ -2,18 +2,23 @@ import { InputText } from "../Inputs";
 import { RiCalendarTodoLine } from "react-icons/ri";
 import { css } from "@emotion/react";
 import Button from "../Button";
-import { useReducer } from "react";
 import styled from '@emotion/styled';
 import { colors } from '../../ui';
 
-export default function Experiences() {
-  const [state, dispatch] = useReducer(experiencesReducer, {
-    experiences: [ { occupation: "", company: "", startDate: "", endDate: ""} ]
-  })
+export default function Experiences({ state, handleChange }) {
+  const addExperience = () => {
+    const newExperience = { occupation: "", company: "", startDate: "", endDate: "" }
+    handleChange("experiences", [...state.experiences, newExperience]);
+  }
 
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    dispatch({ type: "CHANGE_FIELD", payload: { name, value, index } })
+  const manageDataExperiences = (e, index) => {
+    const updateExperiences = state.experiences.map((experience, i) => {
+      if(i === index) {
+        return { ...experience, [e.target.name]: e.target.value }
+      }
+      return experience
+     })
+     handleChange("experiences", updateExperiences);
   }
 
   return (
@@ -22,7 +27,7 @@ export default function Experiences() {
         <Experience
           key={index}
           state={experience}
-          handleChange={(e) => handleChange(e, index)}
+          handleChange={(e) => manageDataExperiences(e, index)}
         />
       ))}
       <Button
@@ -31,7 +36,7 @@ export default function Experiences() {
         `}
         type="button"
         syze="small"
-        onClick={() => dispatch({ type: 'ADD_EXPERIENCE' })}
+        onClick={() => addExperience()}
       >
         Add another experience
       </Button>
@@ -76,25 +81,6 @@ function Experience({ state, handleChange }) {
       />
     </StyledExperience>
   );
-}
-
-const experiencesReducer = (prevstate, action) => {
-  switch (action.type) {
-    case "CHANGE_FIELD":
-      const { name, value, index } = action.payload
-      const updatedExperiences = prevstate.experiences.map((experience, i) => {
-        if(i === index) {
-          return { ...experience, [name]: value }
-        } 
-        return experience;
-      })
-      return { experiences: updatedExperiences }
-    case "ADD_EXPERIENCE":
-      const newExperience = { occupation: "", company: "", startDate: "", endDate: "" }
-      return { experiences: [...prevstate.experiences, newExperience] }
-    default:
-      throw new Error("Action is not recognized!")
-  }
 }
 
 const StyledExperience = styled.div`

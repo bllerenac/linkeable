@@ -11,7 +11,7 @@ export default function Avatar({ state, handleChange }) {
         placeholder="https://..."
         name="avatarUrl"
         value={state.avatarUrl}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
       />
       <SmallContent>Preview:</SmallContent>
       <AvatarContainer

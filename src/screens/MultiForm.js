@@ -23,13 +23,11 @@ export default function MultiFrom({ onFormSubmit }) {
     country: { name: "", code: "" },
     bio: "",
     profession: "",
-    experiences: [],
-    avatarUrl: "",
+    experiences: [{ occupation: "", company: "", startDate: "", endDate: "" }],
+    avatarUrl: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value)
+  const handleChange = (name, value) => {
     dispatch({ type: "CHANGE_FIELD", payload: { name, value } });
   };
 
@@ -93,7 +91,7 @@ export default function MultiFrom({ onFormSubmit }) {
 
 const fieldsStep1 = (state, handleChange) => <Personal state={state} handleChange={handleChange} />
 
-const fieldsStep2 = () => <Experiences />
+const fieldsStep2 = (state, handleChange) => <Experiences state={state} handleChange={handleChange} />
 
 const fieldsStep3 = (state, handleChange) =>  <Avatar state={state} handleChange={handleChange} />
 

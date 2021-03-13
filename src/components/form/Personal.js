@@ -1,10 +1,7 @@
 import { InputText, Select, TextArea } from "../Inputs";
 import { RiCalendarTodoLine } from "react-icons/ri";
 
-export default function Personal({
-  state,
-  handleChange
-}) {
+export default function Personal({ state, handleChange }) {
   return (
     <>
       <InputText
@@ -12,7 +9,7 @@ export default function Personal({
         placeholder="John Doe"
         name="name"
         value={state.name}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
       />
       <InputText
         label="Phone"
@@ -20,7 +17,7 @@ export default function Personal({
         name="phone"
         type="tel"
         value={state.phone}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
       />
       {/* Gender */}
       <InputText
@@ -29,7 +26,7 @@ export default function Personal({
         name="birthday"
         type="date"
         value={state.birthday}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
         // icon={<RiCalendarTodoLine />}
       />
       <Select
@@ -37,7 +34,7 @@ export default function Personal({
         placeholder="Select an option"
         name="country"
         value={state.country.code}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
         options={[
           { value: "pe", text: "Peru" },
           { value: "ve", text: "Venezuela" },
@@ -49,7 +46,7 @@ export default function Personal({
         placeholder="Tell us about you..."
         name="bio"
         value={state.bio}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
         caption="Max 140 characteres"
       />
       <InputText
@@ -57,7 +54,7 @@ export default function Personal({
         placeholder="Software Engineer"
         name="profession"
         value={state.profession}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e.target.name, e.target.value)}
       />
     </>
   );
