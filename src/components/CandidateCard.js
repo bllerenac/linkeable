@@ -17,19 +17,16 @@ const Card = styled.div`
   box-shadow: 2px 2px 0px ${colors.gray4};
   border-radius: 8px;
   cursor: pointer;
-  & > svg {
-    font-size: 20px;
-    cursor: pointer;
-  }
+  & > div {
+    i {
+      transition: all 0.4s ease;
+    }
+  } 
   & > main {
     opacity: 0;
     max-height: 0;
     overflow-y: hidden;
     transition: all 0.4s ease;
-  }
-  & > open {
-    max-height: 1000px;
-    opacity: 1;
   }
 `;
 
@@ -78,7 +75,7 @@ const InfoHeaderContainer = styled.div`
   }
 `;
 
-const InfoArrow = styled.div`
+const InfoArrow = styled.i`
   position: absolute;
   bottom: -4px;
   right: 10px;

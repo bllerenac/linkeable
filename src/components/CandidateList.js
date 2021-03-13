@@ -15,14 +15,12 @@ function CandidateList() {
   const [candidates, setCandidates] = useState(initialCandidates);
 
   const toggleCandidate = index => {
-    console.log("Entro al toggle", index);
     setCandidates(candidates.map((candidate, i) => {
       if (i === index) {
         candidate.open = !candidate.open
       } else {
         candidate.open = false;
       }
-      console.log(candidate.open);
       return candidate;
     }))
   }
