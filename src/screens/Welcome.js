@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
 import logo from "../assets/linkeable-logo.png";
 import Button from "../components/Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ const ButtonContainer = styled.div`
 
 function Welcome() {
   const history = useHistory();
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const handleGuest = () => {
     history.push("search");
   };
@@ -39,9 +41,15 @@ function Welcome() {
       <Logo alt="Linkeable Logo" src={logo} />
       <ButtonContainer>
         <Button size="large" onClick={handleGuest}>
-          Continue as Guest
+          {`Continue as ${isAuthenticated ? user.given_name : "Guest"}`}
         </Button>
-        <Button size="large">Login</Button>
+        {isAuthenticated ? (
+          <Button onClick={() => logout({ returnTo: window.location.origin })} size="large">Logout</Button>
+        ) : (
+          <Button onClick={() => loginWithRedirect()} size="large">
+            Login
+          </Button>
+        )}
       </ButtonContainer>
     </Container>
   );

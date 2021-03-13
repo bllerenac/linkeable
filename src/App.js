@@ -4,6 +4,7 @@ import MultiForm from "./screens/MultiForm";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
 const initialCandidates = [
   {
@@ -53,15 +54,17 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/search">
-          <Search candidates={candidates} />
-        </Route>
-        <Route path="/multiform">
-          <MultiForm onFormSubmit={handleAddCandidate} />
-        </Route>
-        <Route path="/" component={Welcome} />
-      </Switch>
+      <Auth0ProviderWithHistory>
+        <Switch>
+          <Route path="/search">
+            <Search candidates={candidates} />
+          </Route>
+          <Route path="/multiform">
+            <MultiForm onFormSubmit={handleAddCandidate} />
+          </Route>
+          <Route path="/" component={Welcome} />
+        </Switch>
+      </Auth0ProviderWithHistory>
     </Router>
   );
 }
