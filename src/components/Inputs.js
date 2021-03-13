@@ -29,6 +29,20 @@ const StyledSelect = styled.select`
   }
 `;
 
+const StyledTextarea = styled.textarea`
+  width: 100%;
+  min-height: 80px;
+  border: none;
+  resize: none;
+  color: ${colors.gray2};
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: ${colors.gray5};
+  }
+`;
+
 const Container = styled.div(
   (props) => css`
     width: 100%;
@@ -73,6 +87,38 @@ const Caption = styled.span(
   `
 );
 
+const MainRadio = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 10px 0;
+`
+
+const ContainerRadio = styled.div`
+  input {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    transition: all 300ms;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  input:checked + label {
+    background-color: gray;
+    color: white;
+    border: 1px solid transparent;
+  }
+`
+
+const LabelRadio = styled.label`
+  padding: 8px 12px;
+  width: fit-content;
+  border: 1px solid ${colors.gray4};
+`
+
 function InputText({
   label = "",
   caption = "",
@@ -81,6 +127,7 @@ function InputText({
   placeholder = "",
   name = "",
   value = "",
+  type = "",
   onChange,
   cssProp,
 }) {
@@ -90,6 +137,7 @@ function InputText({
       <Container error={error}>
         <StyledInput
           value={value}
+          type={type}
           name={name}
           placeholder={placeholder}
           id={name}
@@ -100,6 +148,28 @@ function InputText({
       {caption && <Caption error={error}>Caption test</Caption>}
     </FieldContainer>
   );
+}
+
+function InputsRadio({ label, onChange }) {
+  return(
+    <FieldContainer>
+      {label && <InputLabel>{label}</InputLabel>}
+      <MainRadio>
+        <ContainerRadio>
+          <input type="radio" id="male" name="gender" value="male" onChange={(e) => onChange(e.target.name, e.target.value)}/>
+          <LabelRadio htmlFor="male">Male</LabelRadio>
+        </ContainerRadio>
+        <ContainerRadio>
+          <input type="radio" id="female" name="gender" value="female" onChange={(e) => onChange(e.target.name, e.target.value)}/>
+          <LabelRadio htmlFor="female"> Female </LabelRadio>
+        </ContainerRadio>
+        <ContainerRadio>
+          <input type="radio" id="other" name="gender" value="other" onChange={(e) => onChange(e.target.name, e.target.value)}/>
+          <LabelRadio htmlFor="other">Other</LabelRadio>
+        </ContainerRadio>
+        </MainRadio>
+    </FieldContainer>
+  )
 }
 
 function Select({
@@ -141,4 +211,29 @@ function Select({
   );
 }
 
-export { InputText, Select };
+function TextArea({
+  label = "",
+  caption = "",
+  error = false,
+  placeholder = "",
+  name = "",
+  value = "",
+  onChange,
+}) {
+  return (
+    <FieldContainer>
+      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+      <Container>
+        <StyledTextarea
+          placeholder={placeholder}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      </Container>
+      {caption && <Caption error={error}>{caption}</Caption>}
+    </FieldContainer>
+  );
+}
+
+export { InputText, Select, TextArea, InputsRadio };

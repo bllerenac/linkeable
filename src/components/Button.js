@@ -15,15 +15,17 @@ const StyledButton = styled.button(
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    border: 1px solid transparent;
+    border: 1px solid ${props.disabled ? "#E0E0E0" : "transparent"};
     gap: 4px;
-    background-color: ${colors.gray2};
-    color: ${colors.white};
+    background-color: ${props.disabled ? "#F2F2F2" : colors.gray2};
+    color: ${props.disabled ? "#E0E0E0" : colors.white};
     font-size: ${props.size === "large" ? "14px" : "12px"};
     line-height: ${props.size === "large" ? "17px" : "15px"};
     cursor: pointer;
+    transition: all 500ms;
+    ${props.css}
     &:hover {
-      background: ${colors.gray4};
+      background: ${props.disabled ? "transparent" : colors.gray4};
     }
     &:active {
       background: ${colors.gray1};
@@ -35,9 +37,9 @@ const StyledButton = styled.button(
   `
 );
 
-function Button({ children, size = "medium", onClick }) {
+function Button({ disabled, css, type, children, size = "medium", onClick }) {
   return (
-    <StyledButton size={size} onClick={onClick}>
+    <StyledButton disabled={disabled} css={css} type={type} size={size} onClick={onClick}>
       {children}
     </StyledButton>
   );

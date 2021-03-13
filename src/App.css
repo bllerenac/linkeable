@@ -1,0 +1,8 @@
+.candidate.open main {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.candidate.open div i {
+  transform: translateY(-50%) rotate(180deg);
+}
