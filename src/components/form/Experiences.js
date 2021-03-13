@@ -1,5 +1,4 @@
 import { InputText } from "../Inputs";
-import { RiCalendarTodoLine } from "react-icons/ri";
 import { css } from "@emotion/react";
 import Button from "../Button";
 import styled from '@emotion/styled';

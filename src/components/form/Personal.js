@@ -1,5 +1,4 @@
 import { InputsRadio, InputText, Select, TextArea } from "../Inputs";
-import { RiCalendarTodoLine } from "react-icons/ri";
 
 export default function Personal({ state, handleChange }) {
   return (
