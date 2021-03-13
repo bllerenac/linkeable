@@ -88,6 +88,9 @@ const InfoArrow = styled.i`
 `;
 
 const InfoBody = styled.main`
+`;
+
+const InfoData = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -105,6 +108,15 @@ const InfoBody = styled.main`
       font-size: 12px;
       line-height: 15px;
     }
+  }
+`;
+
+const InfoExperience = styled.div`
+  & > h3 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
   }
 `;
 
@@ -134,18 +146,23 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
         </InfoArrow> 
       </InfoHeader>
       <InfoBody>
-        <div>
-          <h4>Gender</h4>
-          <p>{candidate.gender}</p>
-          <h4>Phone</h4>
-          <p>{candidate.phone}</p>
-          <h4>Birthday</h4>
-          <p>{candidate.birthday}</p>
-        </div>
-        <div>
-          <h4>Bio</h4>
-          <p>{candidate.bio}</p>
-        </div>
+        <InfoData>
+          <div>
+            <h4>Gender</h4>
+            <p>{candidate.gender}</p>
+            <h4>Phone</h4>
+            <p>{candidate.phone}</p>
+            <h4>Birthday</h4>
+            <p>{candidate.birthday}</p>
+          </div>
+          <div>
+            <h4>Bio</h4>
+            <p>{candidate.bio}</p>
+          </div>
+        </InfoData>
+        <InfoExperience>
+          <h3>Job Experience</h3>
+        </InfoExperience>
       </InfoBody>
     </Card>
   );

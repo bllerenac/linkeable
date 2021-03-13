@@ -16,7 +16,11 @@ const initialCandidates = [
     phone: "987-654-321",
     birthday: "2000-10-24",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
-    open: true,
+    open: false,
+    jobs: [
+      { occupation: "Frontend developer", company: "The Greatest Company SA", start_date: "13-01-2018", end_date: "20-02-2020" },
+      { occupation: "Backend developer", company: "The Main Company SA", start_date: "11-03-2020", end_date: "19-01-2021" },
+    ],
   },
   {
     country: { name: "Mexico", code: "mx" },
@@ -29,6 +33,10 @@ const initialCandidates = [
     birthday: "1994-10-27",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
     open: false,
+    jobs: [
+      { occupation: "Frontend developer", company: "The Other Company SA", start_date: "12-11-2020", end_date: "20-02-2021" },
+      { occupation: "Fullstack developer", company: "The Code Company SA", start_date: "16-03-2018", end_date: "19-01-2020" },
+    ],
   },
   {
     country: { name: "Venezuela", code: "ve" },
@@ -41,6 +49,10 @@ const initialCandidates = [
     birthday: "1990-07-07",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
     open: false,
+    jobs: [
+      { occupation: "Fullstack developer", company: "The Greatest Company SA", start_date: "29-01-2017", end_date: "20-02-2020" },
+      { occupation: "Backend developer", company: "The Code Company SA", start_date: "11-01-2016", end_date: "19-01-2017" },
+    ],
   },
 ];
 

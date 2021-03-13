@@ -126,5 +126,3 @@ const Container = styled.div`
   gap: 8px;
   align-items: center;
 `;
-
-export default MultiForm;
