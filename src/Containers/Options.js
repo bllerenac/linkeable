@@ -6,6 +6,7 @@ const StyledDiv = styled.div`
   flex-direction: column;
   gap: 4px;
   margin: 8px 0px;
+
   & > div{
     display: flex;
     flex-direction:row
