@@ -88,10 +88,14 @@ const InfoArrow = styled.i`
 `;
 
 const InfoBody = styled.main`
+`;
+
+const InfoData = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  padding: 8px;
   & > div {
     width: 50%;
     & > h4 {
@@ -107,6 +111,104 @@ const InfoBody = styled.main`
     }
   }
 `;
+
+const InfoExperience = styled.div`
+  padding: 8px;
+  & > h3 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    margin-bottom: 8px;
+  }
+`;
+
+const InfoJob = styled.div`
+  margin-bottom: 8px;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    & > h4, span {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: #4F4F4F;
+    }
+  }
+  & > p {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #828282
+  }
+`;
+
+function ConvertDate(date) {
+  return date.split("-");
+}
+
+function ConvertMonth(month) {
+  switch(month) {
+    case "01":
+      return "Jan";
+    case "02":
+      return "Feb";
+    case "03":
+      return "Mar";
+    case "04":
+      return "Apr";
+    case "05":
+      return "May";
+    case "06":
+      return "Jun";
+    case "07":
+      return "Jul";
+    case "08":
+      return "Aug";
+    case "09":
+      return "Set";
+    case "10":
+      return "Oct";
+    case "11":
+      return "Nov";
+    case "12":
+      return "Dec";
+    default:
+      break;
+  }
+}
+
+function ConvertTotalDate(date) {
+  date = date.split("-");
+  return new Date(date[2], date[1] - 1, date[0]);
+}
+
+function ConvertDuration(start, end) {
+  let months = ((((end - start) / 1000) / 3600) / 24) / 30;
+  let years = parseInt(months / 12, 10);
+  months = parseInt(months, 10) % 12;
+  if (years === 0) {
+    years = "";
+  }
+  else if (years === 1) {
+    years = "1 year";
+  }
+  else {
+    years = `${years} years`
+  }
+  if (months === 0) {
+    months = "";
+  }
+  else if (months === 1) {
+    months = "1 month";
+  }
+  else {
+    months = `${months} months`
+  }
+  return `${years} ${months}`;
+}
 
 function CandidateCard({ candidate, index, toggleCandidate }) {
   return (
@@ -134,18 +236,36 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
         </InfoArrow> 
       </InfoHeader>
       <InfoBody>
-        <div>
-          <h4>Gender</h4>
-          <p>{candidate.gender}</p>
-          <h4>Phone</h4>
-          <p>{candidate.phone}</p>
-          <h4>Birthday</h4>
-          <p>{candidate.birthday}</p>
-        </div>
-        <div>
-          <h4>Bio</h4>
-          <p>{candidate.bio}</p>
-        </div>
+        <InfoData>
+          <div>
+            <h4>Gender</h4>
+            <p>{candidate.gender}</p>
+            <h4>Phone</h4>
+            <p>{candidate.phone}</p>
+            <h4>Birthday</h4>
+            <p>{candidate.birthday}</p>
+          </div>
+          <div>
+            <h4>Bio</h4>
+            <p>{candidate.bio}</p>
+          </div>
+        </InfoData>
+        <InfoExperience>
+          <h3>Job Experience</h3>
+          {candidate.jobs.map((job) => (
+            <InfoJob>
+              <div>
+                <h4>{job.occupation}</h4>
+                {console.log(ConvertTotalDate(job.start_date))}
+                <span>{ConvertDuration(ConvertTotalDate(job.start_date), ConvertTotalDate(job.end_date))}</span>
+              </div>
+              <p>{job.company}</p>
+              <p>
+                {ConvertMonth(ConvertDate(job.start_date)[1])} {ConvertDate(job.start_date)[2]} - {ConvertMonth(ConvertDate(job.end_date)[1])} {ConvertDate(job.end_date)[2]}
+              </p>
+            </InfoJob>
+          ))}
+        </InfoExperience>
       </InfoBody>
     </Card>
   );
