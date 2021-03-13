@@ -1,4 +1,4 @@
-import { InputText, Select, TextArea } from "../Inputs";
+import { InputsRadio, InputText, Select, TextArea } from "../Inputs";
 import { RiCalendarTodoLine } from "react-icons/ri";
 
 export default function Personal({ state, handleChange }) {
@@ -19,7 +19,10 @@ export default function Personal({ state, handleChange }) {
         value={state.phone}
         onChange={(e) => handleChange(e.target.name, e.target.value)}
       />
-      {/* Gender */}
+      <InputsRadio
+        label="Gender"
+        onChange={handleChange}
+      />
       <InputText
         label="Birthday"
         placeholder="Pick a date"
