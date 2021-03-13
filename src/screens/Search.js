@@ -1,6 +1,5 @@
 import { useEffect, useState, useReducer } from "react";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 import Button from "../components/Button";
 import { InputText } from "../components/Inputs";
 import CandidateList from "../components/CandidateList";
@@ -11,7 +10,9 @@ import { RiArrowDownSFill, RiSearch2Line } from "react-icons/ri";
 import { colors } from "../ui";
 import { useHistory } from "react-router";
 import queryReducer from "../reducers/queryReducer";
-import SelectLabel from "../components/Selectlabel";
+import {SelectLabel, SelectPicker} from "../components/Selectlabel";
+import Interval from "../Containers/Interval"
+import Options from "../Containers/Options"
 
 const SearchForm = styled.form``;
 
@@ -52,7 +53,11 @@ const FiltersContainer = styled.div`
 const FilterCountries = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 8px;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0px 4px;
 `;
 
 function Search({ candidates }) {
@@ -62,7 +67,9 @@ function Search({ candidates }) {
     queryProfession: "",
     queryMinExp: "",
     queryMaxExp: "",
-    queryCountry: ["Peru", "Mexico"],
+    queryMinAge: "",
+    queryMaxAge: "",
+    queryCountry: [],
   });
   const [filteredCandidates, setFilteredCandidates] = useState(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
@@ -95,6 +102,8 @@ function Search({ candidates }) {
         professionRegex.test(candidate.profession) &&
         parseInt(candidate.experience) >= state.queryMinExp &&
         parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
+        parseInt(candidate.age) >= state.queryMinAge &&
+        parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
         state.queryCountry.includes(candidate.country.name)
     );
     setFilteredCandidates(filtered);
@@ -131,60 +140,30 @@ function Search({ candidates }) {
             icon={<RiSearch2Line />}
           />
           <div>
-            <p>Years of experience:</p>
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                gap: "4px",
-                marginTop: "4px",
-              }}
-            >
-              <InputText
-                label="min"
-                placeholder="0"
-                name="queryMinExp"
-                value={state.queryMinExp}
-                onChange={handleQueryChange}
-                cssProp={css`
-                  flex-direction: row;
-                  align-items: center;
-                  width: 100px;
-                `}
-              />
-              <InputText
-                label="max"
-                placeholder="0"
-                name="queryMaxExp"
-                value={state.queryMaxExp}
-                onChange={handleQueryChange}
-                cssProp={css`
-                  flex-direction: row;
-                  align-items: center;
-                  width: 100px;
-                `}
-              />
-            </div>
-            <select onChange={handleCountryChange}>
-              <option value="">Select an option</option>
-              <option value="Peru">Peru</option>
-              <option value="Mexico">Mexico</option>
-              <option value="Venezuela">Venezuela</option>
-            </select>
-            <span>Selected:</span>
-            <FilterCountries>
-              {state.queryCountry.map((c, i) => (
-                <SelectLabel key={i}
-                onClick={() =>
-                  dispatch({
-                    type: "REMOVE_COUNTRY",
-                    payload: { removeCountry: c },
-                  })
-                }>
-                  {c}
-                </SelectLabel>
-              ))}
-            </FilterCountries>
+              <Interval label= "Years of Experience" 
+              onChange={handleQueryChange} 
+              min_value={state.queryMinExp} 
+              max_value={state.queryMaxExp}/>
+              <SelectPicker select_label="Country" onChange={handleCountryChange}/>
+              <FilterCountries>
+                <span>Selected:</span>
+                  {state.queryCountry.map((c, i) => (
+                    <SelectLabel key={i}
+                    onClick={() =>
+                      dispatch({
+                        type: "REMOVE_COUNTRY",
+                        payload: { removeCountry: c },
+                      })
+                    }>
+                      {c}
+                    </SelectLabel>
+                  ))}
+              </FilterCountries>
+              <Interval label= "Age" 
+              onChange={handleQueryChange} 
+              min_value={state.queryMinAge} 
+              max_value={state.queryMaxAge}/>
+              <Options/>
           </div>
         </AdvanceSearch>
       </SearchForm>
