@@ -253,10 +253,9 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
         <InfoExperience>
           <h3>Job Experience</h3>
           {candidate.jobs.map((job) => (
-            <InfoJob>
+            <InfoJob key={job.occupation}>
               <div>
                 <h4>{job.occupation}</h4>
-                {console.log(ConvertTotalDate(job.start_date))}
                 <span>{ConvertDuration(ConvertTotalDate(job.start_date), ConvertTotalDate(job.end_date))}</span>
               </div>
               <p>{job.company}</p>

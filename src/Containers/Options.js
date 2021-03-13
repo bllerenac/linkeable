@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { colors } from "../ui";
-import { css } from "@emotion/react";
 
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  margin: 8px 0px;
+
   & > div{
     display: flex;
     flex-direction:row
@@ -14,6 +16,12 @@ const StyledDiv = styled.div`
     line-height: 17px;
     color: ${colors.gray4}
   }
+`;
+
+const StyledLabelTittle = styled.label`
+  font-size: 14px;
+  line-height: 17px;
+  color: ${colors.gray2};
 `;
 
 const StyledLabel = styled.label`
@@ -27,9 +35,10 @@ const StyledLabel = styled.label`
   }
 `;
 
-function Options ({value, onChange}){
+function Options ({label, value, onChange}){
 return (
   <StyledDiv>
+    <StyledLabelTittle>{label}:</StyledLabelTittle>
     <div>
       {value.map(gender =>{
         return(
