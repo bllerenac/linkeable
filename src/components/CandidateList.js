@@ -8,26 +8,26 @@ const ListContainer = styled.div`
   margin-top: 12px;
 `;
 
-function CandidateList({ candidates, index, toggleCandidate }) {
+function CandidateList({ candidates }) {
 
-  const [setCandidates] = useState(candidates);
+  // const [setCandidates] = useState(candidates);
 
-  const toggleCandidate = index => {
-    setCandidates(candidates.map((candidate, i) => {
-      if (i === index) {
-        candidate.open = !candidate.open
-      } else {
-        candidate.open = false;
-      }
-      return candidate;
-    }))
-  }
+  // const toggleCandidate = index => {
+  //   setCandidates(candidates.map((candidate, i) => {
+  //     if (i === index) {
+  //       candidate.open = !candidate.open
+  //     } else {
+  //       candidate.open = false;
+  //     }
+  //     return candidate;
+  //   }))
+  // }
 
   return (
     <ListContainer>
       {candidates.map((candidate, i) => (
         <CandidateCard
-          key={candidate.name} {...candidate}
+          candidate={candidate} index={i}
         />
       ))}
     </ListContainer>

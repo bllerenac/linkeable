@@ -107,34 +107,26 @@ const InfoBody = styled.div`
   }
 `;
 
-function CandidateCard({
-  country = { name: "Peru", code: "pe" },
-  name = "No name",
-  profession = "No Profession",
-  experience = 0,
-  avatarUrl,
-  gender,
-  phone = "No phone",
-  birthday,
-  bio = "No Bio",
-  open,
-}) {
+function CandidateCard({ candidate, index }) {
   return (
-    <Card>
+    <Card
+      className={ "candidate " + (candidate.open ? "open" : "") }
+      key={index}
+    >
       <Information>
         <InfoHeader>
-          <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
+          <AvatarContainer avatarUrl={candidate.avatarUrl}></AvatarContainer>
           <InfoHeaderContainer>
             <header>
               <img
-                src={`/assets/32x32/${country.code}.png`}
+                src={`/assets/32x32/${candidate.country.code}.png`}
                 width="14px"
                 alt="flag"
               />
-              <h3>{name}</h3>
+              <h3>{candidate.name}</h3>
             </header>
-            <h4>{profession}</h4>
-            <span>{`${experience} years of experience`}</span>
+            <h4>candidate.profession}</h4>
+            <span>{`${candidate.experience} years of experience`}</span>
           </InfoHeaderContainer>
           <InfoArrow>
             <IoMdArrowDropdown />  
@@ -143,15 +135,15 @@ function CandidateCard({
         <InfoBody>
           <div>
             <h4>Gender</h4>
-            <p>{gender}</p>
+            <p>{candidate.gender}</p>
             <h4>Phone</h4>
-            <p>{phone}</p>
+            <p>{candidate.phone}</p>
             <h4>Birthday</h4>
-            <p>{birthday}</p>
+            <p>{candidate.birthday}</p>
           </div>
           <div>
             <h4>Bio</h4>
-            <p>{bio}</p>
+            <p>{candidate.bio}</p>
           </div>
         </InfoBody>
       </Information>  
