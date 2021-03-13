@@ -17,7 +17,7 @@ const initialCandidates = [
     phone: "987-654-321",
     birthday: "2000-10-24",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque interdum rutrum sodales. Nullam mattis fermentum libero, non volutpat.",
-    open: true,
+    open: false,
   },
   {
     country: { name: "Mexico", code: "mx" },

@@ -11,6 +11,9 @@ const ListContainer = styled.div`
 
 function CandidateList({list}) {
   const [candidates, setCandidates] = useState(list);
+  if(list !== candidates){
+    setCandidates(list);
+  }
   const toggleCandidate = index => {
     setCandidates(candidates.map((candidate, i) => {
       if (i === index) {
