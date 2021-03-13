@@ -156,15 +156,15 @@ function InputsRadio({ label, onChange }) {
       {label && <InputLabel>{label}</InputLabel>}
       <MainRadio>
         <ContainerRadio>
-          <input type="radio" id="male" name="gender" value="male" onChange={onChange}/>
+          <input type="radio" id="male" name="gender" value="male" onChange={(e) => onChange(e.target.name, e.target.value)}/>
           <LabelRadio htmlFor="male">Male</LabelRadio>
         </ContainerRadio>
         <ContainerRadio>
-          <input type="radio" id="female" name="gender" value="female" onChange={onChange}/>
+          <input type="radio" id="female" name="gender" value="female" onChange={(e) => onChange(e.target.name, e.target.value)}/>
           <LabelRadio htmlFor="female"> Female </LabelRadio>
         </ContainerRadio>
         <ContainerRadio>
-          <input type="radio" id="other" name="gender" value="other" onChange={onChange}/>
+          <input type="radio" id="other" name="gender" value="other" onChange={(e) => onChange(e.target.name, e.target.value)}/>
           <LabelRadio htmlFor="other">Other</LabelRadio>
         </ContainerRadio>
         </MainRadio>
