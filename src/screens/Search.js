@@ -109,13 +109,14 @@ function Search({ candidates }) {
     const filtered = candidates.filter(
       (candidate) =>
         nameRegex.test(candidate.name) &&
-        //professionRegex.test(candidate.profession) &&
-        //parseInt(candidate.experience) >= state.queryMinExp &&
-        //parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
+        professionRegex.test(candidate.profession) &&
+        parseInt(candidate.experience) >= state.queryMinExp &&
+        parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
         //parseInt(candidate.age) >= state.queryMinAge &&
         //parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
-        state.queryCountry.includes(candidate.country.name)
-        //state.queryGender.includes(candidate.gender)
+        (state.queryGender.includes(candidate.gender) ||
+        state.queryCountry.includes(candidate.country.name))
+        
     );
     setFilteredCandidates(filtered);
     console.log(filteredCandidates)
