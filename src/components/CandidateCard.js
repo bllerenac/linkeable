@@ -5,11 +5,11 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   padding: 8px;
   background: ${colors.white};
   border: 1px solid ${colors.gray4};
@@ -36,13 +36,6 @@ const AvatarContainer = styled.div(
     ${cssProp}
   `
 );
-
-const Information = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-`;
 
 const InfoHeader = styled.div`
   display: flex;
@@ -107,46 +100,46 @@ const InfoBody = styled.div`
   }
 `;
 
-function CandidateCard({ candidate, index }) {
+function CandidateCard({ candidate, index, toggleCandidate }) {
+  console.log(candidate);
   return (
     <Card
       className={ "candidate " + (candidate.open ? "open" : "") }
       key={index}
+      onClick={ () => toggleCandidate(index) }
     >
-      <Information>
-        <InfoHeader>
-          <AvatarContainer avatarUrl={candidate.avatarUrl}></AvatarContainer>
-          <InfoHeaderContainer>
-            <header>
-              <img
-                src={`/assets/32x32/${candidate.country.code}.png`}
-                width="14px"
-                alt="flag"
-              />
-              <h3>{candidate.name}</h3>
-            </header>
-            <h4>candidate.profession}</h4>
-            <span>{`${candidate.experience} years of experience`}</span>
-          </InfoHeaderContainer>
-          <InfoArrow>
-            <IoMdArrowDropdown />  
-          </InfoArrow> 
-        </InfoHeader>
-        <InfoBody>
-          <div>
-            <h4>Gender</h4>
-            <p>{candidate.gender}</p>
-            <h4>Phone</h4>
-            <p>{candidate.phone}</p>
-            <h4>Birthday</h4>
-            <p>{candidate.birthday}</p>
-          </div>
-          <div>
-            <h4>Bio</h4>
-            <p>{candidate.bio}</p>
-          </div>
-        </InfoBody>
-      </Information>  
+      <InfoHeader>
+        <AvatarContainer avatarUrl={candidate.avatarUrl}></AvatarContainer>
+        <InfoHeaderContainer>
+          <header>
+            <img
+              src={`/assets/32x32/${candidate.country.code}.png`}
+              width="14px"
+              alt="flag"
+            />
+            <h3>{candidate.name}</h3>
+          </header>
+          <h4>{candidate.profession}</h4>
+          <span>{`${candidate.experience} years of experience`}</span>
+        </InfoHeaderContainer>
+        <InfoArrow>
+          <IoMdArrowDropdown />  
+        </InfoArrow> 
+      </InfoHeader>
+      <InfoBody>
+        <div>
+          <h4>Gender</h4>
+          <p>{candidate.gender}</p>
+          <h4>Phone</h4>
+          <p>{candidate.phone}</p>
+          <h4>Birthday</h4>
+          <p>{candidate.birthday}</p>
+        </div>
+        <div>
+          <h4>Bio</h4>
+          <p>{candidate.bio}</p>
+        </div>
+      </InfoBody>
     </Card>
   );
 }
