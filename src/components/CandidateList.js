@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import CandidateCard from "./CandidateCard";
 import { useState } from "react";
-import { initialCandidates } from "../App";
 
 const ListContainer = styled.div`
   display: flex;
@@ -10,12 +9,12 @@ const ListContainer = styled.div`
   margin-top: 12px;
 `;
 
-function CandidateList() {
+function CandidateList({ candidates }) {
 
-  const [candidates, setCandidates] = useState(initialCandidates);
+  const [candidatesList, setCandidatesList] = useState(candidates);
 
   const toggleCandidate = index => {
-    setCandidates(candidates.map((candidate, i) => {
+    setCandidatesList(candidatesList.map((candidate, i) => {
       if (i === index) {
         candidate.open = !candidate.open
       } else {
@@ -27,7 +26,7 @@ function CandidateList() {
 
   return (
     <ListContainer>
-      {candidates.map((candidate, i) => (
+      {candidatesList.map((candidate, i) => (
         <CandidateCard
           candidate={candidate}
           index={i}

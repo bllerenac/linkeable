@@ -66,5 +66,4 @@ function App() {
   );
 }
 
-export { initialCandidates };
 export default App;
