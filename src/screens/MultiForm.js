@@ -10,8 +10,8 @@ import Avatar from "../components/form/Avatar";
 import Button from '../components/Button';
 import { ButtonContainer } from '../ui';
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
-export default function MultiFrom({ onFormSubmit }) {
 
+export default function MultiFrom({ onFormSubmit }) {
   const history = useHistory();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
@@ -22,8 +22,9 @@ export default function MultiFrom({ onFormSubmit }) {
     country: { name: "", code: "" },
     bio: "",
     profession: "",
-    experiences: [{ occupation: "", company: "", startDate: "", endDate: "" }],
-    avatarUrl: ""
+    dropdown: "",
+    experiences: [{ occupation: "", company: "", startDate: "", endDate: ""}],
+    avatarUrl: "",
   });
 
   const handleChange = (name, value) => {
@@ -125,3 +126,5 @@ const Container = styled.div`
   gap: 8px;
   align-items: center;
 `;
+
+export default MultiForm;
