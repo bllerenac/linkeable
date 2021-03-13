@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { colors } from "../ui";
-import { css } from "@emotion/react";
 
 const StyledDiv = styled.div`
   display: flex;
