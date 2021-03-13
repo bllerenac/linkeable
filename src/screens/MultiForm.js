@@ -9,10 +9,9 @@ import Personal from "../components/form/Personal";
 import Avatar from "../components/form/Avatar";
 import Button from '../components/Button';
 import { ButtonContainer } from '../ui';
-
 const stepsData = ["Personal Information", "Work experience", "Avatar"];
-
 export default function MultiFrom({ onFormSubmit }) {
+
   const history = useHistory();
   const [currentStep, setCurrentStep] = useState(1);
   const [state, dispatch] = useReducer(formReducer, {
