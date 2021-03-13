@@ -188,7 +188,7 @@ function Search({ candidates }) {
           </div>
         </AdvanceSearch>
       </SearchForm>
-      <CandidateList candidates={filteredCandidates || candidates} />
+      <CandidateList candidates={filteredCandidates || candidates} index={i} />
       <ButtonContainer>
         <CircleButton onClick={handleHomeClick}>
           <RiHome2Line />

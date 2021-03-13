@@ -107,12 +107,6 @@ const InfoBody = styled.div`
   }
 `;
 
-function toggleCard(dropdown) {
-  console.log(dropdown.dropdown)
-  dropdown.dropdown = !dropdown.dropdown;
-  console.log(dropdown.dropdown);
-};
-
 function CandidateCard({
   country = { name: "Peru", code: "pe" },
   name = "No name",
@@ -123,12 +117,10 @@ function CandidateCard({
   phone = "No phone",
   birthday,
   bio = "No Bio",
-  dropdown,
+  open,
 }) {
   return (
-    <Card
-      onClick={ () => toggleCard({dropdown}) }
-      >
+    <Card>
       <Information>
         <InfoHeader>
           <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
