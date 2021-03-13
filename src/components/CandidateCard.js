@@ -16,9 +16,20 @@ const Card = styled.div`
   box-sizing: border-box;
   box-shadow: 2px 2px 0px ${colors.gray4};
   border-radius: 8px;
+  cursor: pointer;
   & > svg {
     font-size: 20px;
     cursor: pointer;
+  }
+  & > main {
+    opacity: 0;
+    max-height: 0;
+    overflow-y: hidden;
+    transition: all 0.4s ease;
+  }
+  & > open {
+    max-height: 1000px;
+    opacity: 1;
   }
 `;
 
@@ -79,7 +90,7 @@ const InfoArrow = styled.div`
   }
 `;
 
-const InfoBody = styled.div`
+const InfoBody = styled.main`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -101,7 +112,6 @@ const InfoBody = styled.div`
 `;
 
 function CandidateCard({ candidate, index, toggleCandidate }) {
-  console.log(candidate);
   return (
     <Card
       className={ "candidate " + (candidate.open ? "open" : "") }
