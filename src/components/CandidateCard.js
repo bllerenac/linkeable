@@ -180,6 +180,36 @@ function ConvertMonth(month) {
   }
 }
 
+function ConvertTotalDate(date) {
+  date = date.split("-");
+  return new Date(date[2], date[1] - 1, date[0]);
+}
+
+function ConvertDuration(start, end) {
+  let months = ((((end - start) / 1000) / 3600) / 24) / 30;
+  let years = parseInt(months / 12, 10);
+  months = parseInt(months, 10) % 12;
+  if (years === 0) {
+    years = "";
+  }
+  else if (years === 1) {
+    years = "1 year";
+  }
+  else {
+    years = `${years} years`
+  }
+  if (months === 0) {
+    months = "";
+  }
+  else if (months === 1) {
+    months = "1 month";
+  }
+  else {
+    months = `${months} months`
+  }
+  return `${years} ${months}`;
+}
+
 function CandidateCard({ candidate, index, toggleCandidate }) {
   return (
     <Card
@@ -226,7 +256,8 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
             <InfoJob>
               <div>
                 <h4>{job.occupation}</h4>
-                <span>Duration</span>
+                {console.log(ConvertTotalDate(job.start_date))}
+                <span>{ConvertDuration(ConvertTotalDate(job.start_date), ConvertTotalDate(job.end_date))}</span>
               </div>
               <p>{job.company}</p>
               <p>
