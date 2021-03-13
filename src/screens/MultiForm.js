@@ -21,13 +21,13 @@ function MultiForm({ onFormSubmit }) {
     country: { name: "", code: "" },
     bio: "",
     profession: "",
+    dropdown: "",
     experiences: [{ occupation: "", company: "", startDate: "", endDate: ""}],
     avatarUrl: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     dispatch({ type: "CHANGE_FIELD", payload: { name, value } });
   };
 

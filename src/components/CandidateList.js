@@ -12,6 +12,7 @@ function CandidateList({ candidates }) {
   return (
     <ListContainer>
       {candidates.map((candidate) => (
+        console.log(candidate),
         <CandidateCard key={candidate.name} {...candidate} />
       ))}
     </ListContainer>

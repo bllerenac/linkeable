@@ -4,6 +4,7 @@ import { colors } from "../ui";
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 const Card = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -44,7 +45,6 @@ const Information = styled.div`
 `;
 
 const InfoHeader = styled.div`
-  position: relative;
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -76,8 +76,8 @@ const InfoHeaderContainer = styled.div`
 
 const InfoArrow = styled.div`
   position: absolute;
-  top: 70%;
-  right: 5%;
+  bottom: -4px;
+  right: 10px;
   width: fit-content;
   height: fit-content;
   cursor: pointer;
@@ -107,6 +107,12 @@ const InfoBody = styled.div`
   }
 `;
 
+function toggleCard(dropdown) {
+  console.log(dropdown.dropdown)
+  dropdown.dropdown = !dropdown.dropdown;
+  console.log(dropdown.dropdown);
+};
+
 function CandidateCard({
   country = { name: "Peru", code: "pe" },
   name = "No name",
@@ -117,10 +123,12 @@ function CandidateCard({
   phone = "No phone",
   birthday,
   bio = "No Bio",
+  dropdown,
 }) {
-  console.log(avatarUrl);
   return (
-    <Card>
+    <Card
+      onClick={ () => toggleCard({dropdown}) }
+      >
       <Information>
         <InfoHeader>
           <AvatarContainer avatarUrl={avatarUrl}></AvatarContainer>
