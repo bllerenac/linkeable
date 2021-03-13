@@ -70,6 +70,7 @@ function Search({ candidates }) {
     queryMinAge: "",
     queryMaxAge: "",
     queryCountry: [],
+    queryGender: [],
   });
   const [filteredCandidates, setFilteredCandidates] = useState(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
@@ -92,6 +93,15 @@ function Search({ candidates }) {
     dispatch({ type: "ADD_COUNTRY", payload: value });
   };
 
+  const handleGenderChange = (e) => {
+    const { value } = e.target;
+    if( e.target.checked ) {
+      dispatch({ type: "ADD_GENDER", payload: value });
+    } else {
+      dispatch({ type: "REMOVE_GENDER", payload: { removeGender: value }});
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameRegex = new RegExp(state.queryName, "i");
@@ -99,14 +109,16 @@ function Search({ candidates }) {
     const filtered = candidates.filter(
       (candidate) =>
         nameRegex.test(candidate.name) &&
-        professionRegex.test(candidate.profession) &&
-        parseInt(candidate.experience) >= state.queryMinExp &&
-        parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
-        parseInt(candidate.age) >= state.queryMinAge &&
-        parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
+        //professionRegex.test(candidate.profession) &&
+        //parseInt(candidate.experience) >= state.queryMinExp &&
+        //parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
+        //parseInt(candidate.age) >= state.queryMinAge &&
+        //parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
         state.queryCountry.includes(candidate.country.name)
+        //state.queryGender.includes(candidate.gender)
     );
     setFilteredCandidates(filtered);
+    console.log(filteredCandidates)
   };
 
   useEffect(() => {
@@ -163,11 +175,11 @@ function Search({ candidates }) {
               onChange={handleQueryChange} 
               min_value={state.queryMinAge} 
               max_value={state.queryMaxAge}/>
-              <Options/>
+              <Options value={["Male", "Female", "Other"]} onChange={handleGenderChange} />
           </div>
         </AdvanceSearch>
       </SearchForm>
-      <CandidateList candidates={filteredCandidates || candidates} />
+      <CandidateList list={filteredCandidates || candidates} />
       <ButtonContainer>
         <CircleButton onClick={handleHomeClick}>
           <RiHome2Line />

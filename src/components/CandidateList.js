@@ -9,25 +9,25 @@ const ListContainer = styled.div`
   margin-top: 12px;
 `;
 
-function CandidateList({ candidates }) {
-
-  const [candidatesList, setCandidatesList] = useState(candidates);
-
+function CandidateList({list}) {
+  const [candidates, setCandidates] = useState(list);
   const toggleCandidate = index => {
-    setCandidatesList(candidatesList.map((candidate, i) => {
+    setCandidates(candidates.map((candidate, i) => {
       if (i === index) {
         candidate.open = !candidate.open
       } else {
         candidate.open = false;
       }
       return candidate;
-    }))
+    })
+    )
   }
 
   return (
     <ListContainer>
-      {candidatesList.map((candidate, i) => (
+      {candidates.map((candidate, i) => (
         <CandidateCard
+          key={i}
           candidate={candidate}
           index={i}
           toggleCandidate={toggleCandidate}

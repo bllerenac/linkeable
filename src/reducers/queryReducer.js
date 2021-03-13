@@ -19,6 +19,21 @@ const queryReducer = (prevState, { type, payload }) => {
         queryCountry: [...newList],
       };
       break;
+    case "ADD_GENDER":
+      const newListGender = new Set([...prevState.queryGender, payload]);
+      newState = {
+        ...prevState,
+        queryGender: [...newListGender],
+      };
+      break;
+    case "REMOVE_GENDER":
+      newState = {
+        ...prevState,
+        queryGender: prevState.queryGender.filter(
+          (c) => c !== payload.removeGender
+        ),
+      };
+      break;
     default:
       throw new Error("Invalid action");
   }
