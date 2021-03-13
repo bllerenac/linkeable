@@ -57,7 +57,7 @@ const FilterCountries = styled.div`
   gap: 8px;
   font-size: 14px;
   line-height: 17px;
-  margin: 0px 4px;
+  margin: 8px 0px;
 `;
 
 function Search({ candidates }) {
@@ -69,7 +69,7 @@ function Search({ candidates }) {
     queryMaxExp: "",
     queryMinAge: "",
     queryMaxAge: "",
-    queryCountry: [],
+    queryCountry: ["Peru", "Mexico", "Venezuela"],
     queryGender: [],
   });
   const [filteredCandidates, setFilteredCandidates] = useState(null);
@@ -107,6 +107,18 @@ function Search({ candidates }) {
     }
   };
 
+  function CalAge(fecha) {
+    var hoy = new Date();
+    var birthday = new Date(fecha);
+    var age = hoy.getFullYear() - birthday.getFullYear();
+    var m = hoy.getMonth() - birthday.getMonth();
+
+    if (m < 0 || (m === 0 && hoy.getDate() < birthday.getDate())) {
+        age--;
+    }
+    return age;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameRegex = new RegExp(state.queryName, "i");
@@ -117,11 +129,9 @@ function Search({ candidates }) {
         professionRegex.test(candidate.profession) &&
         parseInt(candidate.experience) >= state.queryMinExp &&
         parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
-        //parseInt(candidate.age) >= state.queryMinAge &&
-        //parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
-        (state.queryGender.includes(candidate.gender) ||
-        state.queryCountry.includes(candidate.country.name))
-        
+        parseInt(CalAge(candidate.birthday)) >= state.queryMinAge &&
+        parseInt(CalAge(candidate.birthday)) <= (state.queryMaxAge || Infinity) &&
+        (state.queryGender.includes(candidate.gender) || state.queryCountry.includes(candidate.country.name))   
     );
     setFilteredCandidates(filtered);
     console.log(filteredCandidates)
@@ -161,7 +171,8 @@ function Search({ candidates }) {
               <Interval label= "Years of Experience" 
               onChange={handleQueryChange} 
               min_value={state.queryMinExp} 
-              max_value={state.queryMaxExp}/>
+              max_value={state.queryMaxExp}
+              name="Exp"/>
               <SelectPicker select_label="Country" onChange={handleCountryChange}/>
               <FilterCountries>
                 <span>Selected:</span>
@@ -180,8 +191,9 @@ function Search({ candidates }) {
               <Interval label= "Age" 
               onChange={handleQueryChange} 
               min_value={state.queryMinAge} 
-              max_value={state.queryMaxAge}/>
-              <Options value={["Male", "Female", "Other"]} onChange={handleGenderChange} />
+              max_value={state.queryMaxAge}
+              name="Age"/>
+              <Options label="Gender" value={["Male", "Female", "Other"]} onChange={handleGenderChange} />
           </div>
         </AdvanceSearch>
       </SearchForm>

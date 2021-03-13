@@ -19,9 +19,11 @@ const StyledDiv = styled.div`
 const StyledInterval = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 8px 0px;
+  gap: 4px;
 `;
 
-function Interval ({ label, onChange, min_value , max_value}){
+function Interval ({ label, onChange, min_value , max_value, name}){
   return (
     <StyledInterval>
       <StyledLabel>{label}:</StyledLabel>
@@ -29,7 +31,7 @@ function Interval ({ label, onChange, min_value , max_value}){
                 <InputText
                   label="Min"
                   placeholder="0"
-                  name="queryMinExp"
+                  name={`queryMin${name}`}
                   value={min_value}
                   onChange={onChange}
                   cssProp={css`
@@ -41,7 +43,7 @@ function Interval ({ label, onChange, min_value , max_value}){
                 <InputText
                   label="Max"
                   placeholder="0"
-                  name="queryMaxExp"
+                  name={`queryMax${name}`}
                   value={max_value}
                   onChange={onChange}
                   cssProp={css`
