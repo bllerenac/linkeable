@@ -95,6 +95,7 @@ const InfoData = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  padding: 8px;
   & > div {
     width: 50%;
     & > h4 {
@@ -112,11 +113,35 @@ const InfoData = styled.div`
 `;
 
 const InfoExperience = styled.div`
+  padding: 8px;
   & > h3 {
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
     color: #000;
+    margin-bottom: 8px;
+  }
+`;
+
+const InfoJob = styled.div`
+  margin-bottom: 8px;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    & > h4, span {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: #4F4F4F;
+    }
+  }
+  & > p {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #828282
   }
 `;
 
@@ -162,6 +187,16 @@ function CandidateCard({ candidate, index, toggleCandidate }) {
         </InfoData>
         <InfoExperience>
           <h3>Job Experience</h3>
+          {candidate.jobs.map((job) => (
+            <InfoJob>
+              <div>
+                <h4>{job.occupation}</h4>
+                <span>Duration</span>
+              </div>
+              <p>{job.company}</p>
+              <p>{job.start_date} // {job.end_date}</p>
+            </InfoJob>
+          ))}
         </InfoExperience>
       </InfoBody>
     </Card>
