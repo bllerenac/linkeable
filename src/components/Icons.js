@@ -13,8 +13,8 @@ function Icon ({type, color , onClick, size}){
       onClick={onClick}
       css={css`
       fill: ${color};
-      width: 13px;
-      height: 13px;
+      width: 11.5px;
+      height: 11.5px;
       `}
     />
   )
