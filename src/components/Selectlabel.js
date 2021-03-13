@@ -42,9 +42,9 @@ function SelectPicker ({onChange, select_label}) {
   <SelectContainer>
     <StyledLabel>{select_label}</StyledLabel>
     <Select onChange={onChange} placeholder="Hello World">
-      <option hidden selected >Selecciona una opción</option>
+      <option defaultValue hidden >Selecciona una opción</option>
       {countries.map(country =>{
-        return(<option value={country}>{country}</option>)
+        return(<option value={country} key={country}>{country}</option>)
       })}
     </Select>
   </SelectContainer>

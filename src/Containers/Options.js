@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { colors } from "../ui";
-import { css } from "@emotion/react";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -13,10 +11,12 @@ return (
   <StyledDiv>
     {value.map(gender =>{
       return(
-        <>
-          <input type="checkbox" id={gender} name="gender" value={gender} onChange={onChange}/>
-          <label for={gender}>{gender}</label>
-        </>
+        <div  key={gender}>
+          <label>
+            <input type="checkbox" id={gender} name="gender" value={gender} onChange={onChange}/>
+            {gender}
+          </label>
+        </div>
       )
     })}
   </StyledDiv>

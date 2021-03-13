@@ -95,7 +95,11 @@ function Search({ candidates }) {
 
   const handleGenderChange = (e) => {
     const { value } = e.target;
-    dispatch({ type: "ADD_G", payload: value });
+    if( e.target.checked ) {
+      dispatch({ type: "ADD_GENDER", payload: value });
+    } else {
+      dispatch({ type: "REMOVE_GENDER", payload: { removeGender: value }});
+    }
   };
 
   const handleSubmit = (e) => {
@@ -105,15 +109,16 @@ function Search({ candidates }) {
     const filtered = candidates.filter(
       (candidate) =>
         nameRegex.test(candidate.name) &&
-        professionRegex.test(candidate.profession) &&
-        parseInt(candidate.experience) >= state.queryMinExp &&
-        parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
-        parseInt(candidate.age) >= state.queryMinAge &&
-        parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
-        state.queryCountry.includes(candidate.country.name) &&
-        state.queryGender.includes(candidate.gender.name)
+        //professionRegex.test(candidate.profession) &&
+        //parseInt(candidate.experience) >= state.queryMinExp &&
+        //parseInt(candidate.experience) <= (state.queryMaxExp || Infinity) &&
+        //parseInt(candidate.age) >= state.queryMinAge &&
+        //parseInt(candidate.age) <= (state.queryMaxAge || Infinity) &&
+        state.queryCountry.includes(candidate.country.name)
+        //state.queryGender.includes(candidate.gender)
     );
     setFilteredCandidates(filtered);
+    console.log(filteredCandidates)
   };
 
   useEffect(() => {
@@ -174,7 +179,7 @@ function Search({ candidates }) {
           </div>
         </AdvanceSearch>
       </SearchForm>
-      <CandidateList candidates={filteredCandidates || candidates} />
+      <CandidateList list={filteredCandidates || candidates} />
       <ButtonContainer>
         <CircleButton onClick={handleHomeClick}>
           <RiHome2Line />
