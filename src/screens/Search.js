@@ -95,10 +95,15 @@ function Search({ candidates }) {
 
   const handleGenderChange = (e) => {
     const { value } = e.target;
+    const label = document.getElementById(`${value}`);
     if( e.target.checked ) {
       dispatch({ type: "ADD_GENDER", payload: value });
+      label.style.background = "#828282";
+      label.style.color = "#FFFFFF";
     } else {
       dispatch({ type: "REMOVE_GENDER", payload: { removeGender: value }});
+      label.style.background = "#FFFFFF";
+      label.style.color = "#4F4F4F";
     }
   };
 
